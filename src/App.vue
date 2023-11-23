@@ -28,7 +28,7 @@ watch(isShown, (val) => {
 </script>
 
 <template>
-  <div class="tw-h-[100dvh] tw-relative">
+  <div class="tw-h-[100dvh] tw-relative satoshi">
     <SplashScreen
       v-if="isShown"
       :class="{ 'tw-opacity-0':fade }"
@@ -37,7 +37,7 @@ watch(isShown, (val) => {
     <Header class="tw-h-[60px] tw-z-10" />
     <main
       class="tw-absolute tw-inset-0 tw-overflow-y-auto
-      tw-mt-[60px] tw-mb-[83px]">
+      tw-mt-[60px] tw-mb-[83px] tw-bg-white">
       <RouterView />
     </main>
     <Nav />

@@ -6,7 +6,11 @@ module.exports = {
   ],
   prefix: 'tw-',
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#09856F',
+      }
+    },
   },
   plugins: [],
 }

@@ -40,6 +40,6 @@ watch(isShown, (val) => {
       tw-mt-[60px] tw-mb-[83px]">
       <RouterView />
     </main>
-    <Nav class="tw-h-[83px]" />
+    <Nav />
   </div>
 </template>

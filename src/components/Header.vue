@@ -1,6 +1,8 @@
 <template>
-  <header class="tw-absolute tw-inset-x-0 tw-top-0 tw-px-4 tw-py-5 tw-bg-white">
-    <img src="@/assets/logo.svg" class="tw-h-[28px]">
+  <header class="absolute inset-x-0 top-0 px-4 py-5 bg-white">
+    <router-link to="/">
+      <img src="@/assets/logo.svg" class="h-[28px]">
+    </router-link>
   </header>
 </template>
 

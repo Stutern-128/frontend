@@ -10,7 +10,7 @@
       :labels="chartOptions.labels"
     ></apexchart> -->
 
-    <p class="tw-text-4xl">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia a laudantium voluptatem fugit officiis possimus, doloribus velit. Reiciendis expedita id beatae libero, quaerat assumenda officia asperiores pariatur debitis, reprehenderit autem voluptas, ea repellat culpa doloribus qui provident porro veritatis quidem at atque dolorum optio nemo molestiae. Laboriosam atque sed magni.</p>
+    <p class="text-4xl">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia a laudantium voluptatem fugit officiis possimus, doloribus velit. Reiciendis expedita id beatae libero, quaerat assumenda officia asperiores pariatur debitis, reprehenderit autem voluptas, ea repellat culpa doloribus qui provident porro veritatis quidem at atque dolorum optio nemo molestiae. Laboriosam atque sed magni.</p>
   </div>
 </template>
 

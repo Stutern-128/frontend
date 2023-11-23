@@ -28,16 +28,16 @@ watch(isShown, (val) => {
 </script>
 
 <template>
-  <div class="tw-h-[100dvh] tw-relative satoshi">
+  <div class="h-[100dvh] relative satoshi">
     <SplashScreen
       v-if="isShown"
-      :class="{ 'tw-opacity-0':fade }"
-      class="tw-z-20 tw-delay-[2.7s] tw-transition-all tw-duration-500"
+      :class="{ 'opacity-0':fade }"
+      class="z-20 delay-[2.7s] transition-all duration-500"
     />
-    <Header class="tw-h-[60px] tw-z-10" />
+    <Header class="h-[60px] z-10" />
     <main
-      class="tw-absolute tw-inset-0 tw-overflow-y-auto
-      tw-mt-[60px] tw-mb-[83px] tw-bg-white">
+      class="absolute inset-0 overflow-y-auto
+      mt-[60px] mb-[83px] bg-white">
       <RouterView />
     </main>
     <Nav />

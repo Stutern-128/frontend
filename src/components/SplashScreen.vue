@@ -1,7 +1,7 @@
 <template>
   <div
-    class="tw-absolute tw-inset-0 tw-bg-white
-    tw-flex tw-items-center tw-justify-center">
+    class="absolute inset-0 bg-white
+    flex items-center justify-center">
     <Logo :animate="true" />
   </div>
 </template>

@@ -1,12 +1,12 @@
 <template>
   <nav
-    class="tw-absolute tw-inset-x-0 tw-bottom-0 tw-flex sm:tw-justify-center
-    tw-bg-white">
+    class="absolute inset-x-0 bottom-0 flex sm:justify-center
+    bg-white">
     <div
-      class="tw-flex sm:tw-gap-x-10 tw-px-10 tw-py-4 tw-justify-between tw-w-full sm:tw-w-auto
-      [&>a]:tw-flex [&>a]:tw-flex-col [&>a]:tw-justify-center
-      [&>a]:tw-items-center [&>a]:tw-gap-2 [&>a.active]:tw-text-primary
-      [&>a>span]:tw-text-xs ">
+      class="flex sm:gap-x-10 px-10 py-4 justify-between w-full sm:w-auto
+      [&>a]:flex [&>a]:flex-col [&>a]:justify-center
+      [&>a]:items-center [&>a]:gap-2 [&>a.active]:text-primary
+      [&>a>span]:text-xs ">
       <router-link :class="{ 'active': currentRoute===routes[0] }" :to="routes[0]">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
           <mask id="mask0_25_1863" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">

@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <div class="pt-2 px-5">
+    <h1 class="text-xl text-[#151A19] font-bold">Let’s Breathe Freshly!</h1>
+    <p class="text-sm text-[#959595]">The air today is pleasant to breathe. 😊</p>
     <!-- <apexchart
       :type="chartOptions.chart.type"
       :colors="chartOptions.colors"
@@ -10,7 +12,7 @@
       :labels="chartOptions.labels"
     ></apexchart> -->
 
-    <p class="tw-text-4xl">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia a laudantium voluptatem fugit officiis possimus, doloribus velit. Reiciendis expedita id beatae libero, quaerat assumenda officia asperiores pariatur debitis, reprehenderit autem voluptas, ea repellat culpa doloribus qui provident porro veritatis quidem at atque dolorum optio nemo molestiae. Laboriosam atque sed magni.</p>
+    <p class="text-4xl">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia a laudantium voluptatem fugit officiis possimus, doloribus velit. Reiciendis expedita id beatae libero, quaerat assumenda officia asperiores pariatur debitis, reprehenderit autem voluptas, ea repellat culpa doloribus qui provident porro veritatis quidem at atque dolorum optio nemo molestiae. Laboriosam atque sed magni.</p>
   </div>
 </template>
 

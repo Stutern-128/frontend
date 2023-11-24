@@ -59,7 +59,7 @@
         </div>
       </Listbox>
 
-      <button>share</button>
+      <button><ArrowUpOnSquareIcon class="h-6 w-6 text-gray-500" /></button>
     </section>
 
     <section class="mt-4 h-[144px] border border-[#F0F0F0] rounded-2xl relative">
@@ -68,13 +68,10 @@
           <div class="absolute flex items-center justify-center inset-0 pr-8">
             <apexchart
               width="200"
-              :type="chartOptions.chart.type"
-              :colors="chartOptions.colors"
-              :fill="chartOptions.fill"
-              :stroke="chartOptions.stroke"
-              :series="chartOptions.series"
-              :options="chartOptions.plotOptions"
-              :labels="chartOptions.labels"
+              :type="radialChartOptions.chart.type"
+              :series="radialChartOptions.series"
+              :options="radialChartOptions.plotOptions"
+              :labels="radialChartOptions.labels"
             ></apexchart>
           </div>
         </div>
@@ -115,6 +112,26 @@
       </div>
     </section>
 
+    <section class="bg-[#F6F6F6] rounded-2xl p-4 mt-2">
+      <header class="flex justify-between">
+        <h2 class="text-sm text-[#363737]">Average Today’s Air Quality</h2>
+        <Pill class="border-none bg-primary/10 text-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <mask id="mask0_25_2744" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="14">
+              <rect width="14" height="14" fill="#1AD57B"/>
+            </mask>
+            <g mask="url(#mask0_25_2744)">
+              <path d="M1.57498 10.2812C1.45832 10.1646 1.40241 10.026 1.40727 9.86562C1.41214 9.7052 1.46804 9.57152 1.57498 9.46458L4.65207 6.34374C4.87568 6.12013 5.15276 6.00833 5.48332 6.00833C5.81387 6.00833 6.09095 6.12013 6.31457 6.34374L7.81665 7.86041L10.85 4.85624H9.91665C9.75137 4.85624 9.61283 4.80034 9.50102 4.68853C9.38922 4.57673 9.33332 4.43819 9.33332 4.27291C9.33332 4.10763 9.38922 3.96909 9.50102 3.85728C9.61283 3.74548 9.75137 3.68958 9.91665 3.68958H12.25C12.4153 3.68958 12.5538 3.74548 12.6656 3.85728C12.7774 3.96909 12.8333 4.10763 12.8333 4.27291V6.60624C12.8333 6.77152 12.7774 6.91006 12.6656 7.02187C12.5538 7.13367 12.4153 7.18958 12.25 7.18958C12.0847 7.18958 11.9462 7.13367 11.8344 7.02187C11.7226 6.91006 11.6666 6.77152 11.6666 6.60624V5.67291L8.6479 8.69166C8.42429 8.91527 8.1472 9.02708 7.81665 9.02708C7.48609 9.02708 7.20901 8.91527 6.9854 8.69166L5.48332 7.18958L2.39165 10.2812C2.2847 10.3882 2.14859 10.4417 1.98332 10.4417C1.81804 10.4417 1.68193 10.3882 1.57498 10.2812Z" fill="currentColor"/>
+            </g>
+          </svg>
+          <span class="text-[10px]">16%</span>
+        </Pill>
+      </header>
+      <main class="mt-3">
+        <apexchart width="100%" :options="arearadialChartOptions" :series="areaChartSeries" type="area" />
+      </main>
+    </section>
+
   </div>
 </template>
 
@@ -128,29 +145,22 @@ import {
   ListboxOptions,
   ListboxOption,
 } from '@headlessui/vue'
-import { CheckIcon, ChevronDownIcon } from '@heroicons/vue/20/solid'
+import { CheckIcon, ChevronDownIcon, ArrowUpOnSquareIcon } from '@heroicons/vue/20/solid'
 
-const chartOptions2 = ref({
-  series: [67, 84],
-  plotOptions: {
-    radialBar: {
-      dataLabels: {
-        total: {
-          show: false,
-          label: 'TOTAL'
-        }
-      }
-    }
-  },
-  labels: ['TEAM A', 'TEAM B']
-})
-var chartOptions = {
+// listbox
+const dates_ = [
+  { name: 'today' },
+  { name: 'yesterday' },
+  { name: 'this week' },
+]
+const selectedDate = ref(dates_[0])
+
+// first chart
+const radialChartOptions = {
   chart: {
-    // height: 280,
     type: "radialBar",
   },
   series: [67, 20],
-  colors: ["#20E647"],
   plotOptions: {
     radialBar: {
       hollow: {
@@ -158,20 +168,11 @@ var chartOptions = {
         size: "70%",
         background: "#293450"
       },
-      track: {
-        dropShadow: {
-          enabled: true,
-          top: 2,
-          left: 0,
-          blur: 4,
-          opacity: 0.15
-        }
-      },
       dataLabels: {
         name: {
           offsetY: -10,
           color: "#fff",
-          fontSize: "13px"
+          fontSize: "12px"
         },
         value: {
           color: "#fff",
@@ -179,27 +180,97 @@ var chartOptions = {
           show: true
         }
       }
-    }
-  },
-  fill: {
-    type: "gradient",
-    gradient: {
-      shade: "dark",
-      type: "vertical",
-      gradientToColors: ["#87D4F9"],
-      stops: [0, 100]
-    }
-  },
-  stroke: {
-    lineCap: "round"
+    },
+    stroke: {
+      lineCap: "round",
+      width: 2, // Set the desired thickness for the chart line
+      curve: 'smooth', // Set the curve type to 'smooth' for smoother lines
+    },
+    // fill: {
+    //   type: "gradient",
+    //   gradient: {
+    //     shade: "dark",
+    //     type: "vertical",
+    //     gradientToColors: ["#87D4F9"],
+    //     stops: [0, 100]
+    //   }
+    // },
+    colors: ['#1AD57B', '#1AD57B80'], // Set custom colors for each series
   },
   labels: ["Progress"]
 };
 
-const dates_ = [
-  { name: 'today' },
-  { name: 'yesterday' },
-  { name: 'this week' },
-]
-const selectedDate = ref(dates_[0])
+// second chart
+const arearadialChartOptions = ref({
+  chart: {
+    type: 'area',
+    stacked: true,
+    toolbar: {
+      show: false, // Set this to false to hide the toolbar
+    },
+  },
+  xaxis: {
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+  },
+  legend: {
+    show: false, // Set this to false to hide the legend
+  },
+  dataLabels: {
+    enabled: false, // Set this to false to hide the labels at each point
+  },
+  stroke: {
+    width: 2, // Set the desired thickness for the chart line
+    curve: 'smooth', // Set the curve type to 'smooth' for smoother lines
+  },
+  colors: ['#FBA018', '#1AD57B'], // Set custom colors for each series
+  annotations: {
+    points: [
+      // Add labels to specific data points
+      {
+        x: 'Feb',
+        y: 49,
+        marker: {
+          size: 2,
+          fillColor: '#FF5733',
+          strokeColor: '#FF5733',
+        },
+        label: {
+          borderColor: '#FF5733',
+          style: {
+            fontSize: '12px',
+            color: '#000',
+          },
+          text: 'Point A',
+        },
+      },
+      {
+        x: 'May',
+        y: 80,
+        marker: {
+          size: 2,
+          fillColor: '#3399FF',
+          strokeColor: '#3399FF',
+        },
+        label: {
+          borderColor: '#3399FF',
+          style: {
+            fontSize: '12px',
+            color: '#000',
+          },
+          text: 'Point B',
+        },
+      },
+    ],
+  },
+})
+const areaChartSeries = ref([
+  {
+    name: 'Series A',
+    data: [0, 40, 35, 50, 49, 0],
+  },
+  {
+    name: 'Series B',
+    data: [0, 30, 25, 40, 39, 0],
+  },
+]);
 </script>

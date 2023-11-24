@@ -5,7 +5,7 @@
     <div
       class="flex sm:gap-x-10 px-10 py-4 justify-between w-full sm:w-auto
       [&>a]:flex [&>a]:flex-col [&>a]:justify-center
-      [&>a]:items-center [&>a]:gap-2 [&>a.active]:text-primary
+      [&>a]:items-center [&>a]:gap-2 [&>a.active]:text-primary-dark
       [&>a>span]:text-xs ">
       <router-link :class="{ 'active': currentRoute===routes[0] }" :to="routes[0]">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

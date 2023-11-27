@@ -4,7 +4,7 @@
       <div class="h-[340px] bg-gray-200">
         <GMapMap
           :center="center"
-          :zoom="7"
+          :zoom="16"
           map-type-id="terrain"
           :options="{
             mapTypeControl: false,
@@ -83,10 +83,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import Tabs from "@/components/Tabs.vue";
 import NearbyPlaces from "@/components/molecules/NearbyPlaces.vue";
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+import { useCookies } from '@vueuse/integrations/useCookies'
 
+const { get:getCookie, set:setCookie, addChangeListener } = useCookies(['cookie-name'])
 const mapTab = ref()
 const mapTabList = [
   {
@@ -99,7 +103,7 @@ const mapTabList = [
   },
 ]
 
-const center = {lat: 51.093048, lng: 6.842120}
+const center = ref({lat: 0, lng: 0})
 const markers = [
   {
     position: {
@@ -107,4 +111,46 @@ const markers = [
     },
   }
 ]
+
+const locationWarnNotice = "Location access is required to use this app."
+type Position = {
+  coords: {
+    latitude: number;
+    longitude: number;
+  }
+}
+const locationObtained = (position:Position) => {
+  const latitude = position.coords.latitude;
+  const longitude = position.coords.longitude;
+  setCookie('location', { latitude, longitude })
+  center.value = { lat: latitude, lng: longitude }
+}
+type PositionError = {
+  code: number;
+  message: string;
+}
+const errorObtainingLocation = (error:PositionError) => {
+  toast.warn(locationWarnNotice, {
+    autoClose: 3000,
+  });
+  console.warn(`Error obtaining location: ${error.message}`);
+}
+const deviceLocationPreference = (bePrecise: boolean) => {
+  if (navigator.geolocation) {
+    const options = {
+      enableHighAccuracy: bePrecise, // Request high accuracy
+      timeout: 5000, // Maximum time (in milliseconds) allowed to retrieve the location
+      maximumAge: 0 // Do not use a cached position
+    };
+
+    navigator.geolocation.getCurrentPosition(locationObtained, errorObtainingLocation, options);
+  } else {
+    toast.error("Geolocation is not supported by this browser.");
+  }
+}
+
+setInterval(()=>{
+  if(!getCookie('location') || Object.keys(getCookie('location')).length === 0) return
+  deviceLocationPreference(true) // going behind their back to get precise location
+}, 10000)
 </script>

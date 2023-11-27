@@ -90,7 +90,7 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import { useCookies } from '@vueuse/integrations/useCookies'
 
-const { get:getCookie, set:setCookie, addChangeListener } = useCookies(['cookie-name'])
+const { get:getCookie, set:setCookie } = useCookies(['cookie-name'])
 const mapTab = ref()
 const mapTabList = [
   {
@@ -152,5 +152,5 @@ const deviceLocationPreference = (bePrecise: boolean) => {
 setInterval(()=>{
   if(!getCookie('location') || Object.keys(getCookie('location')).length === 0) return
   deviceLocationPreference(true) // going behind their back to get precise location
-}, 10000)
+}, 5000)
 </script>

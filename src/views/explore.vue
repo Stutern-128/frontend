@@ -149,8 +149,8 @@ const deviceLocationPreference = (bePrecise: boolean) => {
   }
 }
 
-setInterval(()=>{
+onMounted(()=>{
   if(!getCookie('location') || Object.keys(getCookie('location')).length === 0) return
   deviceLocationPreference(true) // going behind their back to get precise location
-}, 5000)
+})
 </script>

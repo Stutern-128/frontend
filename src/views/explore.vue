@@ -2,7 +2,28 @@
   <div>
     <section class="relative">
       <div class="h-[340px] bg-gray-200">
-  
+        <GMapMap
+          :center="center"
+          :zoom="7"
+          map-type-id="terrain"
+          :options="{
+            mapTypeControl: false,
+            streetViewControl: false,
+            fullscreenControl: false,
+            zoomControl: false,
+          }"
+          class="h-full">
+          <GMapCluster>
+            <GMapMarker
+              :key="index"
+              v-for="(m, index) in markers"
+              :position="m.position"
+              :clickable="true"
+              :draggable="true"
+              @click="center=m.position"
+            />
+          </GMapCluster>
+        </GMapMap>
       </div>
       <div class="absolute top-0 inset-x-0 px-5 pt-5">
         <Tabs
@@ -76,5 +97,14 @@ const mapTabList = [
     name: "PM 2.5",
     slug: 'pm25',
   },
+]
+
+const center = {lat: 51.093048, lng: 6.842120}
+const markers = [
+  {
+    position: {
+      lat: 51.093048, lng: 6.842120
+    },
+  }
 ]
 </script>

@@ -23,7 +23,7 @@
       <div
         v-for="item in tableData"
         class="grid grid-cols-9 [&>*]:py-1 [&>*]:px-2 [&>*]:border-r
-        text-[#3F484A] text-xs font-light">
+        text-[#3F484A] text-xs font-light [&>*]:flex [&>*]:items-center">
         <div class="col-span-2" :style="bgClass(item.color)"></div>
         <div class="col-span-2" :style="fadedBgClass(item.color)">{{ item.concern }}</div>
         <div class="col-span-2" :style="fadedBgClass(item.color)">{{ item.index }}</div>

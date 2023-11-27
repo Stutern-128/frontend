@@ -5,3 +5,8 @@
 .satoshi * {
   font-family: 'Satoshi', sans-serif;
 }
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
